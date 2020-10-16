@@ -6,33 +6,32 @@ namespace Practical_work_FIELD
     {
         static void Main(string[] args)
         {
-
-            //┌ ┬ ┐
-            int fieldWidth = 3; //ширина поля 
+            int fieldWidth = 2; //ширина поля 
             int fieldHeight = 2;//высота поля 
-            int indentUp = 5;   //отступ сверху
+            int indentUp = 4;   //отступ сверху
             int indentLeft = 4;// отступ слева 
-            int cellHeight = 2;//высота ячейки
-            int cellWidth = 5;//ширина ячейки
+            int cellHeight = 4;//высота ячейки
+            int cellWidth = 4;//ширина ячейки
+            int selectedCellX = 1;
+            int selectedCellY = 1;
 
             PrintIndentUp(indentUp);
-            PrintUpLine(fieldWidth, cellWidth, indentLeft);
+            PrintLine("┌", "┬", "┐", "─", fieldWidth, cellWidth, indentLeft);
 
-            for (int i = 0; i < fieldHeight; i++)// кол-во всех ячеек 
+            for (int y = 1; y <= fieldHeight; y++)// кол-во всех ячеек по Y
             {
-                for (int J = 0; J < cellHeight; J++) //высота одно ячейки
+                for (int x = 1; x <= cellHeight; x++) //высота одной ячейки
                 {
-                    PrintIndentLeft(indentLeft);
-                    for (int k = 0; k < fieldWidth; k++) //длина одно линии
+                    for (int i=1;i<= fieldWidth;i++) 
                     {
-                        PrintCells(cellWidth, indentLeft);
+                        PrintLine("│", "│", "│", " ", fieldWidth, cellWidth, indentLeft);
                     }
-                    Console.WriteLine("│");
                 }
-                if (i != fieldHeight-1)
-                    PrintCentralLine(fieldWidth, cellWidth, indentLeft);
+
+                if (y != fieldHeight)
+                    PrintLine("├", "┼", "┤", "─", fieldWidth, cellWidth, indentLeft);
                 else
-                    PrintEndLine(fieldWidth, cellWidth, indentLeft);
+                    PrintLine("└", "┴", "┘", "─", fieldWidth, cellWidth, indentLeft);
             }
 
         }
@@ -45,32 +44,23 @@ namespace Practical_work_FIELD
             }
         }
 
-        static void PrintUpLine(int fieldWidth, int cellWidth,int indentLeft)
+        static void PrintLine(string left, string top, string ringht,string middle, int fieldWidth, int cellWidth,int indentLeft)
         {
             PrintIndentLeft(indentLeft);
 
-            Console.Write("┌");
-            for (int i = 0; i < fieldWidth; i++)
+            Console.Write(left);
+            for (int i = 1; i <= fieldWidth; i++)
             {
-                for (int j = 0; j < cellWidth; j++)
+                for (int j = 1; j <= cellWidth; j++)
                 {
-                    Console.Write("─");
+                    Console.Write(middle);
                 }
 
-                if(i!= fieldWidth-1)                
-                    Console.Write("┬");                
+                if(i!= fieldWidth)                
+                    Console.Write(top);                
                 else                
-                    Console.WriteLine("┐");
+                    Console.WriteLine(ringht);
               
-            }
-        }
-
-        static void PrintCells(int cellWidth, int indentLeft)
-        {
-            Console.Write("│");
-            for (int i = 0; i < cellWidth; i++)
-            {
-                Console.Write(" ");
             }
         }
 
@@ -82,52 +72,18 @@ namespace Practical_work_FIELD
             }
         }
 
-        static void PrintCentralLine(int fieldWidth, int cellWidth, int indentLeft)
-        {
-            PrintIndentLeft(indentLeft);
-
-            Console.Write("├");
-            for (int i = 0; i < fieldWidth; i++)
-            {
-                for (int j = 0; j < cellWidth; j++)
-                {
-                    Console.Write("─");
-                }
-
-                if (i != fieldWidth - 1)
-                {
-                    Console.Write("┼");
-                }
-                else
-                {
-                    Console.WriteLine("┤");
-
-                }
-            }
-        }
-
-        static void PrintEndLine(int fieldWidth, int cellWidth, int indentLeft)
-        {                        
-            PrintIndentLeft(indentLeft);
-
-            Console.Write("└");
-            for (int i = 0; i < fieldWidth; i++)
-            {
-                for (int j = 0; j < cellWidth; j++)
-                {
-                    Console.Write("─");
-                }
-
-                if (i != fieldWidth - 1)
-                {
-                    Console.Write("┴");
-                }
-                else
-                {
-                    Console.WriteLine("┘");
-
-                }
-            }           
-        }
+        //static void PrintColorCells(int cellWidth, int indentLeft)
+        //{
+        //    Console.Write("│");
+        //    for (int i = 0; i < cellWidth; i++)
+        //    {
+        //        Console.BackgroundColor = ConsoleColor.White;
+        //        Console.Write(" ");
+        //    }
+        //}
+        //if (selectedCellX == J || selectedCellY == k)
+        //    PrintCells(cellWidth, indentLeft);
+        //else
+        //    PrintIndentLeft(indentLeft);
     }
 }
